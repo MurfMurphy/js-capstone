@@ -1,0 +1,35 @@
+body{
+    background-color: black;
+    margin: 10%;
+    background-image: url('../background.png');
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#guessingZone{
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+#guessingZone h2{
+    font-size: 22px;
+    padding: 20px;
+}
+#record{
+    position: absolute;
+    top: 60%;
+    font-size: 22px;
+    color: white;
+}
+#letterGuess{
+    width: 30px;
+    height: 30px;
+}
+#letterSubmit{
+    width: 30px;
+    height: 30px;
+}
+#wordBoard{
+    color: white;
+}

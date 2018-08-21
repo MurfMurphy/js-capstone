@@ -1,0 +1,13 @@
+
+
+HTML needs input element of some sort linked to check against a word
+
+word displayed, blank, in box format [][][][][][][]
+
+input will check against (loop through) all boxes and if it matches, reveals it
+
+To pick the word, have a math random pick one of the words (probably all built as new elements w/ JS)
+
+
+We can use the parts of our constructor element (new Words) to impact HTML elements
+
