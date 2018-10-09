@@ -1,94 +1,83 @@
-$(document).ready(function(){ 
 
-    var wins = 0
-    var losses = 0
-    //starting val for wins/losses (save to cookie if time?)
+    let attemptNum = 7;
 
-    var attempts = 10
-    var gameover = false
-    //gameover state and attempts start
 
-    if (attempts == 0){
-        gameover == true
-        //when attempts run out set gameover state on
-    }
-    if (gameover == true){
-        alert('YOU LOSE, YOU GET NOTHING, GOOD DAY SIR')
-        var losses = losses + 1;
-        $('#losses').html(losses.val());
-        var gameover = false;
-        var attempts = 10;
-        //reset the game and declare the persons loss
+    const wordChoices = ['RACECAR', 'JAVASCRIPT', 'BATMAN', 'MASTODON', 
+    'ILLEGAL', 'ZEUS', 'FREDDY', 'SYZYGY', 'NONEXISTANT']
+
+    const wordHints = {
+        RACECAR: 'Palindrome',
+        JAVASCRIPT: 'Scary',
+        BATMAN: 'Hates jokes',
+        MASTODON: 'Heavy elephant',
+        ILLEGAL: 'Sick Bird of Prey',
+        ZEUS: 'A Shocking Dude',
+        FREDDY: 'Worse than Jason',
+        SYZYGY: 'Give up',
+        NONEXISTANT: 'My will to live'
     }
 
+    //Pick a word
+    const chosenWord = wordChoices[Math.floor(Math.random()* wordChoices.length)];
 
-function GameStart(){
-    this.words = [];
-    this.playerInput = ""
-    this.chosenWord;
-    this.answerArray=[];
+    //Put attempts in index/as well as Hint for chosen word
+    document.getElementById('attempts').innerHTML = `${attemptNum} attempts remaining.`
+    document.getElementById('hint').innerHTML = `${wordHints[chosenWord]}`
 
-    this.addWords = function(word_instance){
-        this.words.push(word_instance);
+    //Generate _'s for board and put them to HTML
+
+    let answerArray = [];
+    for (var i = 0; i < chosenWord.length; i++) {
+        answerArray[i] = '_';
     }
-    //to put the words/hints into array
 
-    this.chooseWord = function(){
-        this.chosenWord = this.words[Math.floor(this.words.length * Math.random())]
-        console.log(this.chosenWord.word, this.chosenWord.hint)
-    //choose a word/hint combo, store them in chosenWord.word/hint
+    window.onload = function(){
+        var letters = document.getElementById("letters").children;
+        for (a of letters ) {
+        a.addEventListener("click", function(select){ 
+            select.target.disabled = 'true';
+            gameLoop(this.innerText); 
+        })
+        }
     }
-    $('#letterGuess').on('change', function(e){
-        this.playerInput = e.target.value;
-        console.log(playerInput)
-    });
-    //store the player input into the var
-    for(var i = 0; i<this.chosenWord.length; i++){
-        answerArray[i] = "_";
-    }
-    blankAnswer = answerArray.join("");
-    $("#wordBoard").append(blankAnswer);
-    //should produce a line of _'s the word length
-
     
+    document.getElementById('wordBoard').innerHTML = answerArray.join(' ')
 
+    let lettersToGuess = chosenWord.length;
 
-}
+    function gameLoop(input){
 
+        //Game
+        if (lettersToGuess > 0 ){
 
-function Word(word, hint){
-    this.word = word;
-    this.hint = hint;
-    //word class
-}
+            let letterMatch = false;
+            //Loop through guess and iterate on success
+                for (let i = 0; i <chosenWord.length; i++){
+                    if (chosenWord[i]=== input) {
+                        letterMatch = true;
+                        answerArray[i] = input;
+                        lettersToGuess--;
+                    }
+                    if (lettersToGuess === 0){
+                        alert("That's a Bingo, great job!");
 
+                    setTimeout(function() {
+                        window.location.reload()
+                    },3000)
+                }      
+            } if (!letterMatch) {
+            attemptNum--;
+            document.getElementById('attempts').innerHTML = `${attemptNum} attempts remaining.`; 
+            }
+            if (attemptNum == 0){
+            alert("YOU LOSE, YOU GET NOTHING, GOOD DAY SIR");
+            setTimeout(function() {
+                window.location.reload()
+            },3000) 
+            } 
 
-var word1 = new Word('RACECAR', 'Palindrome');
-    word2 = new Word('JAVASCRIPT', 'Scary');
-    word3 = new Word('BATMAN', 'Hates jokes');
-    word4 = new Word('MASTODON', 'Heavy elephant');
-    word5 = new Word('ILLEGAL', 'Sick Bird of Prey');
-    word6 = new Word('ZEUS', 'A Shocking Dude');
-    word7 = new Word('FREDDY', 'Worse than Jason');
-    word8 = new Word('SYZYGY', 'Give up');
-    word9 = new Word('NONEXISTANT', 'My will to live');
+        }
+        //Post board to index
+        document.getElementById('wordBoard').innerHTML = answerArray.join('');
+    }
 
-var game = new GameStart();
-
-
-game.addWords(word1);
-game.addWords(word2);
-game.addWords(word3);
-game.addWords(word4);
-game.addWords(word5);
-game.addWords(word6);
-game.addWords(word7);
-game.addWords(word8);
-game.addWords(word9);
-game.chooseWord();
-
-
-GameStart();
-
-
-})

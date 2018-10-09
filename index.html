@@ -6,28 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="css/my_styles.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="my_library.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
     <title>Wheel of Hangman</title>
 </head>
 <body>
 
     <div id="wordDisplay">
         <h1 id="wordBoard"></h1>
+        <h1>Hint:</h1><br>
+        <h1 id="hint"></h1>
+        <h1>Attempts Remaining:</h1><br>
+        <h1 id="attempts"></h1>
+        <button id="tryAgain" onclick ="window.location.reload()">Try Again</button> 
     </div>
+
+    
 
 
     <div id='guessingZone'>
         <h2>GUESS A LETTER:</h2><br>
-        <input id="letterGuess" type="text" name="letterGuess"><br>
-        <h2>LETTERS GUESSED:</h2><br>
-        <span id="guessedLetters"></span>
+        <div id="letters">
+            <button>A</button>
+            <button>B</button>
+            <button>C</button>
+            <button>D</button>
+            <button>E</button>
+            <button>F</button>
+            <button>G</button>
+            <button>H</button>
+            <button>I</button><br>
+            <button>J</button>
+            <button>K</button>
+            <button>L</button>
+            <button>M</button>
+            <button>N</button>
+            <button>O</button>
+            <button>P</button>
+            <button>Q</button><br>
+            <button>R</button>
+            <button>S</button>
+            <button>T</button>
+            <button>U</button>
+            <button>V</button>
+            <button>W</button>
+            <button>X</button>
+            <button>Y</button>
+            <button>Z</button>
+        </div>
     </div>
-
-    <div id='record'>
-        Wins:<h2 id='wins'></h2><br>
-        Losses:<h2 id='losses'></h2><br>
-    </div>
-
+    <script src="my_library.js"></script>
 </body>
 </html>
